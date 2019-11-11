@@ -26,17 +26,17 @@ void CGameLogic::InitMap(CGraph &g)
             anTemp[i][j] = rand() % 20;
         }
     }
-    
+
     for (int i = 0; i < 12; i++)
     {
         for (int j = 0; j < 12; j++)
         {
-            //¸³Öµ
+            //èµ‹å€¼
             g.AddVertex(anTemp[i][j]);
         }
     }
-    
-    //¸üĞÂ»¡ĞÅÏ¢
+
+    //æ›´æ–°å¼§ä¿¡æ¯
     for (int i = 0; i < 12; i++)
     {
         for (int j = 0; j < 12; j++)
@@ -57,8 +57,8 @@ bool CGameLogic::isLink(CGraph &g, Vertex v1, Vertex v2)
 }
 return false;
 */
-    
-    /*//Ò»ÌõÖ±ÏßÁªÍ¨
+
+    /*//ä¸€æ¡ç›´çº¿è”é€š
     int nRow1 = v1.row;
     int nCol1 = v1.col;
     int nRow2 = v2.row;
@@ -80,40 +80,37 @@ AddVertex(v2);
 return true;
 }
 }
-
-//Á½ÌõÖ±ÏßÁ¬Í¨
+//ä¸¤æ¡ç›´çº¿è¿é€š
 if (OneCornerLink(anMap, v1, v2) == true)
 {
 AddVertex(v2);
 return true;
 }
-
-//ÈıÌõÖ±ÏßÁªÍ¨
+//ä¸‰æ¡ç›´çº¿è”é€š
 if (TwoCornerLink(anMap, v1, v2) == true)
 {
 AddVertex(v2);
 return true;
 }
 DeleteVertex();*/
-    
-    //»ñÈ¡¶¥µãË÷ÒıºÅ
+
+    //è·å–é¡¶ç‚¹ç´¢å¼•å·
     int nV1Index = v1.row * 12 + v1.col;
     int nV2Index = v2.row * 12 + v2.col;
-    
-    //Ñ¹ÈëµÚÒ»¸öµã
+
+    //å‹å…¥ç¬¬ä¸€ä¸ªç‚¹
     PushVertex(nV1Index);
-    
-    //ÅĞ¶ÏÁ½¶¥µãÊÇ·ñÁªÍ¨
+
+    //åˆ¤æ–­ä¸¤é¡¶ç‚¹æ˜¯å¦è”é€š
     /*if (g.GetArc(nV1Index, nV2Index) == true)
      *	{
      *		PushVertex(v2);
      *		return true;
 }
-
 PopVertex();
 */
-    
-    if (SearchPath(g, nV1Index, nV2Index)==true)
+
+    if (SearchPath(g, nV1Index, nV2Index) == true)
     {
         return true;
     }
@@ -125,12 +122,12 @@ void CGameLogic::Clear(CGraph &g, Vertex v1, Vertex v2)
 {
     int nV1Index = v1.row * 12 + v1.col;
     int nV2Index = v2.row * 12 + v2.col;
-    
-    //¸üĞÂ¶¥µãĞÅÏ¢
+
+    //æ›´æ–°é¡¶ç‚¹ä¿¡æ¯
     g.UpdateVertex(nV1Index, BLANK);
     g.UpdateVertex(nV2Index, BLANK);
-    
-    //¸üĞÂ±ßĞÅÏ¢
+
+    //æ›´æ–°è¾¹ä¿¡æ¯
     //	UpdateArc(g, nV1Index, nV2Index);
     UpdateArc(g, v1.row, v1.col);
     UpdateArc(g, v2.row, v2.col);
@@ -146,7 +143,7 @@ int CGameLogic::GetVexPath(Vertex avPath[256])
     return m_nVexNum;
 }
 
-bool CGameLogic::isBlank(CGraph & g)
+bool CGameLogic::isBlank(CGraph &g)
 {
     int nVertex = g.GetVexnum();
     for (int i = 0; i < nVertex; i++)
@@ -159,18 +156,18 @@ bool CGameLogic::isBlank(CGraph & g)
     return true;
 }
 
-bool CGameLogic::SearchValidPath(CGraph & g)
+bool CGameLogic::SearchValidPath(CGraph &g)
 {
     int nVexnum = g.GetVexnum();
     for (int i = 0; i < nVexnum; i++)
     {
-        //1.µÃµ½µÚÒ»¸ö·Ç¿Õ¶¥µã
+        //1.å¾—åˆ°ç¬¬ä¸€ä¸ªéç©ºé¡¶ç‚¹
         if (g.GetVertex(i) == BLANK)
         {
             continue;
         }
-        
-        //±éÀúµÃµ½µÚ¶ş¸öÍ¬É«¾°µã
+
+        //éå†å¾—åˆ°ç¬¬äºŒä¸ªåŒè‰²æ™¯ç‚¹
         for (int j = 0; j < nVexnum; j++)
         {
             if (i != j)
@@ -181,15 +178,14 @@ bool CGameLogic::SearchValidPath(CGraph & g)
                     PopVertex();
                     continue;
                 }
-                
+
                 if (SearchPath(g, i, j) == true)
                 {
                     return true;
                 }
-                
+
                 PopVertex();
             }
-            
         }
     }
     return false;
@@ -216,7 +212,7 @@ void CGameLogic::PushVertex(int nV)
 {
     m_avPath[m_nVexNum] = nV;
     m_nVexNum++;
-    
+
     if (IsCornor())
     {
         m_nCornor++;
@@ -232,13 +228,13 @@ void CGameLogic::PopVertex()
     m_nVexNum--;
 }
 
-void CGameLogic::UpdateArc(CGraph & g, int nRow, int nCol)
+void CGameLogic::UpdateArc(CGraph &g, int nRow, int nCol)
 {
     int nV1Index = nRow * 12 + nCol;
     if (nCol > 0)
     {
         int nV2Index = nV1Index - 1;
-        //ÅĞ¶ÏÓë×ó±ßÏàÁÚµÄÊÇ·ñÓĞ¹ØÏµ
+        //åˆ¤æ–­ä¸å·¦è¾¹ç›¸é‚»çš„æ˜¯å¦æœ‰å…³ç³»
         int nV1Info = g.GetVertex(nV1Index);
         int nV2Info = g.GetVertex(nV2Index);
         if (nV1Info == nV2Info || nV1Info == BLANK || nV2Info == BLANK)
@@ -249,7 +245,7 @@ void CGameLogic::UpdateArc(CGraph & g, int nRow, int nCol)
     if (nCol < 11)
     {
         int nV2Index = nV1Index + 1;
-        //ÅĞ¶ÏÓëÓÒ±ßÊÇ·ñÓĞ¹ØÏµ
+        //åˆ¤æ–­ä¸å³è¾¹æ˜¯å¦æœ‰å…³ç³»
         int nV1Info = g.GetVertex(nV1Index);
         int nV2Info = g.GetVertex(nV2Index);
         if (nV1Info == nV2Info || nV1Info == BLANK || nV2Info == BLANK)
@@ -260,7 +256,7 @@ void CGameLogic::UpdateArc(CGraph & g, int nRow, int nCol)
     if (nRow > 0)
     {
         int nV2Index = nV1Index - 12;
-        //ÅĞ¶ÏÓëÉÏ·½ÊÇ·ñÓĞ¹ØÏµ
+        //åˆ¤æ–­ä¸ä¸Šæ–¹æ˜¯å¦æœ‰å…³ç³»
         int nV1Info = g.GetVertex(nV1Index);
         int nV2Info = g.GetVertex(nV2Index);
         if (nV1Info == nV2Info || nV1Info == BLANK || nV2Info == BLANK)
@@ -271,7 +267,7 @@ void CGameLogic::UpdateArc(CGraph & g, int nRow, int nCol)
     if (nRow < 11)
     {
         int nV2Index = nV1Index + 12;
-        //ÅĞ¶ÏÓëÏÂ·½ÊÇ·ñÓĞ¹ØÏµ
+        //åˆ¤æ–­ä¸ä¸‹æ–¹æ˜¯å¦æœ‰å…³ç³»
         int nV1Info = g.GetVertex(nV1Index);
         int nV2Info = g.GetVertex(nV2Index);
         if (nV1Info == nV2Info || nV1Info == BLANK || nV2Info == BLANK)
@@ -281,46 +277,46 @@ void CGameLogic::UpdateArc(CGraph & g, int nRow, int nCol)
     }
 }
 
-bool CGameLogic::SearchPath(CGraph & g, int nV0, int nV1)
+bool CGameLogic::SearchPath(CGraph &g, int nV0, int nV1)
 {
-    //µÃµ½¶¥µãÊı
+    //å¾—åˆ°é¡¶ç‚¹æ•°
     int nVexnum = g.GetVexnum();
-    
-    //±éÀúÍ¼ÖĞnV0ĞĞ£¬´Ó0ÁĞµ½nVexnumÁĞ£¬ÖµÎªtrueµÄµã
+
+    //éå†å›¾ä¸­nV0è¡Œï¼Œä»0åˆ—åˆ°nVexnumåˆ—ï¼Œå€¼ä¸ºtrueçš„ç‚¹
     for (int nVi = 0; nVi < nVexnum; nVi++)
     {
         if (g.GetArc(nV0, nVi) && !IsExist(nVi))
         {
-            //Ñ¹Èëµ±Ç°¶¥µã£¬¼ÙÉèÂ·¾¶ÎªÒ»¸öÓĞĞ§¶¥µã
+            //å‹å…¥å½“å‰é¡¶ç‚¹ï¼Œå‡è®¾è·¯å¾„ä¸ºä¸€ä¸ªæœ‰æ•ˆé¡¶ç‚¹
             PushVertex(nVi);
             if (m_nCornor > 2)
             {
                 PopVertex();
                 continue;
             }
-            
-            //µ±ÖĞ¼ä¶¥µã²»ÊÇnV1Ê±£¬¼ÌĞøËÑÑ°ÏÂÒ»¸öÏàÁÚÇÒÁ¬Í¨µÄ¶¥µã
+
+            //å½“ä¸­é—´é¡¶ç‚¹ä¸æ˜¯nV1æ—¶ï¼Œç»§ç»­æœå¯»ä¸‹ä¸€ä¸ªç›¸é‚»ä¸”è¿é€šçš„é¡¶ç‚¹
             if (nVi != nV1)
             {
-                //µ±ÖĞ¼ä¶¥µã²»Îª¿ÕÊ±£¬±íÊ¾¸ÃÌõÂ·¾¶²»¿Õ
+                //å½“ä¸­é—´é¡¶ç‚¹ä¸ä¸ºç©ºæ—¶ï¼Œè¡¨ç¤ºè¯¥æ¡è·¯å¾„ä¸ç©º
                 if (g.GetVertex(nVi) != BLANK)
                 {
-                    PopVertex(); //È¥³ıÑ¹ÈëµÄ¶¥µã£¬Óëpushvertex£¨nvi£©¶ÔÓ¦
+                    PopVertex(); //å»é™¤å‹å…¥çš„é¡¶ç‚¹ï¼Œä¸pushvertexï¼ˆnviï¼‰å¯¹åº”
                     continue;
                 }
-                
+
                 if (SearchPath(g, nVi, nV1))
                 {
-                    //±íÊ¾ÕÒµ½ÁËÒ»ÌõÂ·¾¶
+                    //è¡¨ç¤ºæ‰¾åˆ°äº†ä¸€æ¡è·¯å¾„
                     return true;
                 }
             }
-            else //ÏàµÈ£¬Ôò±íÊ¾ÒÑ¾­ÕÒµ½Ò»ÌõÂ·¾¶
+            else //ç›¸ç­‰ï¼Œåˆ™è¡¨ç¤ºå·²ç»æ‰¾åˆ°ä¸€æ¡è·¯å¾„
             {
                 return true;
             }
-            
-            PopVertex();//È¡³öÑ¹ÈëµÄ¶¥µã
+
+            PopVertex(); //å–å‡ºå‹å…¥çš„é¡¶ç‚¹
         }
     }
     return false;

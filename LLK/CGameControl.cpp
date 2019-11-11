@@ -37,27 +37,27 @@ void CGameControl::SetSecPoint(int nRow, int nCol)
 
 bool CGameControl::Link(Vertex avPath[256], int &nVexNum)
 {
-    //ÅĞ¶ÏÊÇ·ñÊÇÍ¬Ò»ÕÅÍ¼Æ¬
+    //åˆ¤æ–­æ˜¯å¦æ˜¯åŒä¸€å¼ å›¾ç‰‡
     if (m_svSelFst.row == m_svSelSec.row && m_svSelFst.col == m_svSelSec.col)
     {
         return false;
     }
-    //ÅĞ¶ÏÍ¼Æ¬ÊÇ·ñÏàÍ¬
-    
+    //åˆ¤æ–­å›¾ç‰‡æ˜¯å¦ç›¸åŒ
+
     int nInfo1 = m_graph.GetVertex(m_svSelFst.row * 12 + m_svSelFst.col);
     int nInfo2 = m_graph.GetVertex(m_svSelSec.row * 12 + m_svSelSec.col);
     if (nInfo1 != nInfo2 || nInfo1 == BLANK || nInfo2 == BLANK)
     {
         return false;
     }
-    
-    //ÅĞ¶ÏÊÇ·ñÁ¬Í¨
+
+    //åˆ¤æ–­æ˜¯å¦è¿é€š
     CGameLogic gameLogic;
     if (gameLogic.isLink(m_graph, m_svSelFst, m_svSelSec))
     {
-        nVexNum = gameLogic.GetVexPath(avPath);//Ïû×Ó
-        gameLogic.Clear(m_graph, m_svSelFst, m_svSelSec);//·µ»ØÂ·¾¶¶¥µã
-        return true;//±íÊ¾Á¬Í¨
+        nVexNum = gameLogic.GetVexPath(avPath);           //æ¶ˆå­
+        gameLogic.Clear(m_graph, m_svSelFst, m_svSelSec); //è¿”å›è·¯å¾„é¡¶ç‚¹
+        return true;                                      //è¡¨ç¤ºè¿é€š
     }
     return false;
 }
@@ -70,7 +70,7 @@ bool CGameControl::isWin(int nTime)
         m_graph.ClearGraph();
         return GAME_LOSE;
     }
-    
+
     if (logic.isBlank(m_graph))
     {
         m_graph.ClearGraph();
@@ -79,7 +79,7 @@ bool CGameControl::isWin(int nTime)
     return GAME_PLAY;
 }
 
-bool CGameControl::help(Vertex avPath[256], int & nVexnum)
+bool CGameControl::help(Vertex avPath[256], int &nVexnum)
 {
     CGameLogic logic;
     if (logic.SearchValidPath(m_graph))

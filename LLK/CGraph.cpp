@@ -12,17 +12,17 @@ CGraph::~CGraph()
 
 void CGraph::InitGraph(void)
 {
-    //³õÊ¼»¯¼ÆÊıÆ÷
+    //åˆå§‹åŒ–è®¡æ•°å™¨
     m_nVexnum = 0;
     m_nArcnum = 0;
-    
-    //³õÊ¼»¯¶¥µã
+
+    //åˆå§‹åŒ–é¡¶ç‚¹
     for (int i = 0; i < MAX_VERTEX_NUM; i++)
     {
         m_Vertices[i] = -1;
     }
-    
-    //³õÊ¼»¯±ß
+
+    //åˆå§‹åŒ–è¾¹
     for (int i = 0; i < MAX_VERTEX_NUM; i++)
     {
         for (int j = 0; j < MAX_VERTEX_NUM; j++)

@@ -6,10 +6,12 @@ class CGameControl
 public:
     CGameControl();
     ~CGameControl();
+
 private:
     CGraph m_graph;
     Vertex m_svSelFst;
     Vertex m_svSelSec;
+
 public:
     void StartGame();
     int GetElement(int nRow, int nCol);

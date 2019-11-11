@@ -4,7 +4,7 @@ typedef struct tagVertex
     int row;
     int col;
     int info;
-}Vertex;
+} Vertex;
 #define BLANK -1
 #define PLAY_TIMER_ID 1
 #define GAME_LOSE -1

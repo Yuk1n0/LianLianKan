@@ -4,24 +4,23 @@ class CGraph
 public:
     CGraph();
     ~CGraph();
-    
-    #define MAX_VERTEX_NUM 256
-    typedef int Vertices[MAX_VERTEX_NUM];//¶¥µãÊı¾İÀàĞÍ
-    typedef bool AdjMatrix[MAX_VERTEX_NUM][MAX_VERTEX_NUM];//±ßÊı¾İÀàĞÍ
-    
-    void InitGraph(void);
-    void AddVertex(int nInfo);//½«¶¥µãinfoÌí¼Óµ½¶¥µãÊı×é
-    int GetVertex(int nIndex);//»ñÈ¡¶¥µãÊı×éÖĞË÷ÒıÎªnIndexµÄ¶¥µã
-    void AddArc(int nV1Index, int nV2Index);//Ìí¼Ó¹ØÏµ¾ØÕóÖĞÁ½¸öµÄ¹ØÏµ
-    bool GetArc(int nV1Index, int nV2Index);
-    int GetVexnum(void);//»ñÈ¡¶¥µãÊı×éÖĞµÄ¶¥µãÊı
-    void UpdateVertex(int nIndex, int nInfo);//½«Ë÷ÒıºÅnIndexµÄ¶¥µãµÄÖµ¸üĞÂÎªnInfo
-    void ClearGraph();
-    int m_nVexnum;//¶¥µãÊıÁ¿
-    
-protected:
-    Vertices m_Vertices;//¶¥µãÊı×é
-    AdjMatrix m_AdjMatrix;//¹ØÏµ¾ØÕó
-    int m_nArcnum;//±ßµÄÊıÁ¿
-};
 
+#define MAX_VERTEX_NUM 256
+    typedef int Vertices[MAX_VERTEX_NUM];                   //é¡¶ç‚¹æ•°æ®ç±»å‹
+    typedef bool AdjMatrix[MAX_VERTEX_NUM][MAX_VERTEX_NUM]; //è¾¹æ•°æ®ç±»å‹
+
+    void InitGraph(void);
+    void AddVertex(int nInfo);               //å°†é¡¶ç‚¹infoæ·»åŠ åˆ°é¡¶ç‚¹æ•°ç»„
+    int GetVertex(int nIndex);               //è·å–é¡¶ç‚¹æ•°ç»„ä¸­ç´¢å¼•ä¸ºnIndexçš„é¡¶ç‚¹
+    void AddArc(int nV1Index, int nV2Index); //æ·»åŠ å…³ç³»çŸ©é˜µä¸­ä¸¤ä¸ªçš„å…³ç³»
+    bool GetArc(int nV1Index, int nV2Index);
+    int GetVexnum(void);                      //è·å–é¡¶ç‚¹æ•°ç»„ä¸­çš„é¡¶ç‚¹æ•°
+    void UpdateVertex(int nIndex, int nInfo); //å°†ç´¢å¼•å·nIndexçš„é¡¶ç‚¹çš„å€¼æ›´æ–°ä¸ºnInfo
+    void ClearGraph();
+    int m_nVexnum; //é¡¶ç‚¹æ•°é‡
+
+protected:
+    Vertices m_Vertices;   //é¡¶ç‚¹æ•°ç»„
+    AdjMatrix m_AdjMatrix; //å…³ç³»çŸ©é˜µ
+    int m_nArcnum;         //è¾¹çš„æ•°é‡
+};

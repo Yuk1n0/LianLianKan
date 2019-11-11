@@ -7,32 +7,31 @@ public:
     CGameLogic();
     ~CGameLogic();
     void InitMap(CGraph &g);
-    bool isLink(CGraph &g,Vertex v1,Vertex v2);
+    bool isLink(CGraph &g, Vertex v1, Vertex v2);
     void Clear(CGraph &g, Vertex v1, Vertex v2);
     int GetVexPath(Vertex avPath[256]);
     bool isBlank(CGraph &g);
-    bool SearchValidPath(CGraph &g);//ÌáÊ¾Ëã·¨
+    bool SearchValidPath(CGraph &g); //æç¤ºç®—æ³•
 protected:
     Vertex m_anPath[256];
-    int m_avPath[256]; //±£´æ½øĞĞÁ¬½ÓÅĞ¶ÏÊ±Ëù¾­¹ıµÄ¶¥µã
-    int m_nCornor; //Á¬½ÓÂ·¾¶Êı×ém_anPathÖĞµÄ¹ÕµãÊı
-    int m_nVexNum; //¶¥µãÊı
-    
+    int m_avPath[256]; //ä¿å­˜è¿›è¡Œè¿æ¥åˆ¤æ–­æ—¶æ‰€ç»è¿‡çš„é¡¶ç‚¹
+    int m_nCornor;     //è¿æ¥è·¯å¾„æ•°ç»„m_anPathä¸­çš„æ‹ç‚¹æ•°
+    int m_nVexNum;     //é¡¶ç‚¹æ•°
+
     //	void AddVertex(Vertex v);
     //	void DeleteVertex();
     //	void PushVertex(Vertex v);
     void PushVertex(int nV);
     void PopVertex();
-    void UpdateArc(CGraph &g, int nRow, int nCol);//ÅĞ¶ÏµØÍ¼ÖĞnRowĞĞ£¬nColÁĞµÄ¶¥µãÓëËüÉÏÏÂ×óÓÒµÄ¶¥µãÊÇ·ñÓĞ±ß£¬ÓĞ£¬Ôò¸üĞÂÍ¼½á¹¹
-    bool SearchPath(CGraph &g, int nV0, int nV1);//Éî¶ÈÓÅÏÈËÑË÷£¬ÅĞ¶Ïv0Óëv1ÊÇ·ñÏàÁ¬
-    bool IsExist(int nVi);//ÅĞ¶ÏË÷ÒıÎªnViµÄ¶¥µãÊÇ·ñ±£´æµ½Á¬Í¨Êı×ém_anPathÖĞ
-    bool IsCornor(void);//ÅĞ¶ÏÂ·¾¶Êı×ém_anPathÖĞ£¬Èı¸ö¶¥µãÄÜ·ñ¹¹³ÉÒ»¸ö¶¥µã
-    
-    /*bool LinkInRow(int anMap[][12], Vertex v1, Vertex v2); //ÅĞ¶ÏºáÏòÊÇ·ñÁªÍ¨
-     *	bool LinkInCol(int anMap[][12], Vertex v1, Vertex v2);//ÅĞ¶Ï×İÏòÊÇ·ñÁªÍ¨
-     *	bool OneCornerLink(int anMap[][12], Vertex v1, Vertex v2);//Ò»¸ö¹ÕµãÁªÍ¨ÅĞ¶Ï
-     *	bool TwoCornerLink(int anMap[][12], Vertex v1, Vertex v2);
-     *	bool LineY(int anMap[][12], int nRow1, int nRow2, int nCol);//Ö±ÏßÁªÍ¨YÖá
-     *	bool LineX(int anMap[][12], int nRow, int nCol1, int nCol2);//Ö±ÏßÁªÍ¨XÖá*/
-};
+    void UpdateArc(CGraph &g, int nRow, int nCol); //åˆ¤æ–­åœ°å›¾ä¸­nRowè¡Œï¼ŒnColåˆ—çš„é¡¶ç‚¹ä¸å®ƒä¸Šä¸‹å·¦å³çš„é¡¶ç‚¹æ˜¯å¦æœ‰è¾¹ï¼Œæœ‰ï¼Œåˆ™æ›´æ–°å›¾ç»“æ„
+    bool SearchPath(CGraph &g, int nV0, int nV1);  //æ·±åº¦ä¼˜å…ˆæœç´¢ï¼Œåˆ¤æ–­v0ä¸v1æ˜¯å¦ç›¸è¿
+    bool IsExist(int nVi);                         //åˆ¤æ–­ç´¢å¼•ä¸ºnViçš„é¡¶ç‚¹æ˜¯å¦ä¿å­˜åˆ°è¿é€šæ•°ç»„m_anPathä¸­
+    bool IsCornor(void);                           //åˆ¤æ–­è·¯å¾„æ•°ç»„m_anPathä¸­ï¼Œä¸‰ä¸ªé¡¶ç‚¹èƒ½å¦æ„æˆä¸€ä¸ªé¡¶ç‚¹
 
+    /*bool LinkInRow(int anMap[][12], Vertex v1, Vertex v2); //åˆ¤æ–­æ¨ªå‘æ˜¯å¦è”é€š
+     *	bool LinkInCol(int anMap[][12], Vertex v1, Vertex v2);//åˆ¤æ–­çºµå‘æ˜¯å¦è”é€š
+     *	bool OneCornerLink(int anMap[][12], Vertex v1, Vertex v2);//ä¸€ä¸ªæ‹ç‚¹è”é€šåˆ¤æ–­
+     *	bool TwoCornerLink(int anMap[][12], Vertex v1, Vertex v2);
+     *	bool LineY(int anMap[][12], int nRow1, int nRow2, int nCol);//ç›´çº¿è”é€šYè½´
+     *	bool LineX(int anMap[][12], int nRow, int nCol1, int nCol2);//ç›´çº¿è”é€šXè½´*/
+};
