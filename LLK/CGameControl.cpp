@@ -19,7 +19,6 @@ void CGameControl::StartGame()
 
 int CGameControl::GetElement(int nRow, int nCol)
 {
-    //	return m_anMap[nRow][nCol];
     return m_graph.GetVertex(nRow * 12 + nCol);
 }
 
@@ -42,8 +41,8 @@ bool CGameControl::Link(Vertex avPath[256], int &nVexNum)
     {
         return false;
     }
-    //判断图片是否相同
 
+    //判断图片是否相同
     int nInfo1 = m_graph.GetVertex(m_svSelFst.row * 12 + m_svSelFst.col);
     int nInfo2 = m_graph.GetVertex(m_svSelSec.row * 12 + m_svSelSec.col);
     if (nInfo1 != nInfo2 || nInfo1 == BLANK || nInfo2 == BLANK)

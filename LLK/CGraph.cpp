@@ -40,7 +40,6 @@ void CGraph::AddVertex(int nInfo)
     }
     m_Vertices[m_nVexnum] = nInfo;
     m_nVexnum++;
-    //	return m_nVexnum;
 }
 
 int CGraph::GetVertex(int nIndex)
